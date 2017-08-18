@@ -1,0 +1,2 @@
+useDynLib(HDGENE)
+exportPattern("^[[:alpha:]]+")
