@@ -1,8 +1,8 @@
 # HDGENE
 HDGENE: High dimensional genetic association analysis package
-# Installing
-library(devtools)
 
+# Installation
+library(devtools)
 install_github("YaoZhou89/HDGENE")
 
 # Running the tests
