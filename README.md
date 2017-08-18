@@ -11,15 +11,13 @@ library(HDGENE)
 
 ##read data
 
-setwd("~/data/emaize")
+myGD = read.big.matrix("demo.dat",head=F,sep="\t",type="char")
 
-myGD = read.big.matrix("emaize_220K.dat",head=F,sep="\t",type="char")
+myGM = read.table("demo.map",head=T)
 
-myGM = read.table("emaize_220K.map",head=T)
+myY = read.table("demo.txt",head=T)
 
-myY = read.table("pheno_emaize.txt",head=T)
-
-myCV = read.table("emaize_PCA3.txt",head=T)
+myCV = read.table("demo.cov",head=T)
 
 ##run additive model
 
