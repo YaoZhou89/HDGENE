@@ -1,6 +1,6 @@
 HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.out = TRUE,getback=FALSE,LD = 0.7,p.threshold = NA , LD.num = 50){
   print("-----------------------Welcome to HDGENE, additive model is working----------------------")
-  myEB = EBGWAS(Y = Y,GD = GD,GM = GM, maxLoop = maxLoop,file.output = F, getback = getback,LD = LD,p.threshold = p.threshold, LD.num = LD.num)
+  myEB = EBGWAS(Y = Y,GD = GD,CV= CV,GM = GM, maxLoop = maxLoop,file.output = F, getback = getback,LD = LD,p.threshold = p.threshold, LD.num = LD.num)
   beta = myEB$beta
   trait.name = colnames(Y)[2]
   Done = F
