@@ -1,6 +1,6 @@
 HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.out = TRUE,getback=FALSE,LD = 0.7,p.threshold = NA , LD.num = 50){
   print("-----------------------Welcome to HDGENE, additive model is working----------------------")
-  myEB = EBGWAS(Y = Y,GD = GD,GM = GM, maxLoop = 100,file.output = F, getback = getback,LD = LD,p.threshold = p.threshold, LD.num = LD.num)
+  myEB = EBGWAS(Y = Y,GD = GD,GM = GM, maxLoop = maxLoop,file.output = F, getback = getback,LD = LD,p.threshold = p.threshold, LD.num = LD.num)
   beta = myEB$beta
   trait.name = colnames(Y)[2]
   Done = F
@@ -27,7 +27,7 @@ HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.
       CV1 = t(as.matrix(CV1))
       Psort=Blink.LDRemove(Porder=1:nrow(CV1),GDneo=CV1,bound=FASLE,LD=0.99,model="A",orientation="row",LD.num = nrow(CV1))
       CV = t(CV1[Psort,])[,-1]
-      myEB = EBGWAS(CV = CV,Y=Y,GD=GD,GM=GM, maxLoop = 100,file.output = F,getback = getback,LD = LD,p.threshold = p.threshold,LD.num = LD.num)
+      myEB = EBGWAS(CV = CV,Y=Y,GD=GD,GM=GM, maxLoop = maxLoop,file.output = F,getback = getback,LD = LD,p.threshold = p.threshold,LD.num = LD.num)
       beta = myEB$beta
       GWAS.new = myEB$GWAS
       if(is.null(GWAS.new)){
