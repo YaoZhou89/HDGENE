@@ -299,6 +299,7 @@
               myG = myG[,1:ny/log(ny)]
               myGM = myGM[1:ny/log(ny),]
             }
+            print(paste(ncol(myG),"SNPs were fitted in EM-BLASSO..."))
             myEM = EM_LASSO(CV1,myG,as.matrix(Y1[,2]),myGM)
           }else{
             myEM = EM_LASSO(CV1,myG,as.matrix(Y1[,2]),myGM)

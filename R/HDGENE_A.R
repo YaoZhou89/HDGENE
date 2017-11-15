@@ -73,6 +73,7 @@ HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.
             GD1 = GD1[,1:(nrow(Y)/log(nrow(Y)))]
             GM1 = GM1[1:(nrow(Y)/log(nrow(Y))),]
           }
+          print(paste(ncol(GD1),"SNPs were fitted in EM-BLASSO..."))
           myEM = EM_LASSO(CV = CV.back,GD = GD1,y = y,GM = GM1)
         }else{
           myEM = EM_LASSO(CV = CV.back,GD = GD1,y = y,GM = GM1)
