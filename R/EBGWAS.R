@@ -1,5 +1,5 @@
 `EBGWAS` <- function(Y=NULL,QTN.position=NULL,GD=NULL,GM=NULL,CV=NULL,DPP=100000000,kinship.algorithm="FARM-CPU",file.output=TRUE,cutOff=0.01,method.GLM="FarmCPU.LM",Prior=NULL,ncpus=1,maxLoop=2,LD=0.7,threshold.output=.0001,alpha=c(.01,.05,.1,.2,.3,.4,.5,.6,.7,.8,.9,1),WS=c(1e0,1e3,1e4,1e5,1e6,1e7),GP=NULL
-                   ,maxOut=10,converge=1,iteration.output=FALSE,acceleration=0,threshold=NA,model="A",MAF.calculate=FALSE,plot.style="FarmCPU",p.threshold=NA,maf.threshold=0,bound=FALSE,method.sub="reward",method.sub.final="reward",stepwise=FALSE,BIC.method="even",LD.wise=TRUE,time.cal=TRUE,Prediction = F,getback=FALSE,LD.num = 50){
+                   ,maxOut=10,converge=1,iteration.output=FALSE,acceleration=0,threshold=NA,model="A",MAF.calculate=FALSE,plot.style="FarmCPU",p.threshold=NA,maf.threshold=0,bound=FALSE,method.sub="reward",method.sub.final="reward",stepwise=FALSE,BIC.method="even",LD.wise=TRUE,time.cal=TRUE,Prediction = F,getback=FALSE,LD.num = 50,GS.prediction = F){
 
   if(!is.null(CV)) CV = as.matrix(CV)
   time.start=proc.time()
@@ -294,7 +294,13 @@
           myG = t(as.matrix(GD1[seqQTN,]))
           myGM = GM[seqQTN,]
           print(paste(ncol(myG),"SNPs were fitted in EM-BLASSO..."))
-          myEM = EM_LASSO(CV1,myG,as.matrix(Y1[,2]),myGM)
+          if(GS.prediction){
+            if(ncol(myG) > ny/log(ny)) myG = myG[,1:ny/log(ny)]
+            myEM = EM_LASSO(CV1,myG,as.matrix(Y1[,2]),myGM)
+          }else{
+            myEM = EM_LASSO(CV1,myG,as.matrix(Y1[,2]),myGM)
+          }
+          
         }
 
 

@@ -1,6 +1,6 @@
 HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.out = TRUE,getback=FALSE,LD = 0.7,p.threshold = NA , LD.num = 50,GS.prediction = F){
   print("-----------------------Welcome to HDGENE, additive model is working----------------------")
-  myEB = EBGWAS(Y = Y,GD = GD,CV= CV,GM = GM, maxLoop = maxLoop,file.output = F, getback = getback,LD = LD,p.threshold = p.threshold, LD.num = LD.num)
+  myEB = EBGWAS(Y = Y,GD = GD,CV= CV,GM = GM, maxLoop = maxLoop,file.output = F, getback = getback,LD = LD,p.threshold = p.threshold, LD.num = LD.num,GS.prediction = F)
   beta = myEB$beta
   trait.name = colnames(Y)[2]
   Done = F
@@ -69,7 +69,7 @@ HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.
       }else{
         print(paste(ncol(GD1),"SNPs were fitted in EM-BLASSO..."))
         if(GS.prediction){
-          if (ncol(GD1) > n/log(n)) GD1 = GD1[,1:(n/log(n))]
+          if (ncol(GD1) > nrow(Y)/log(nrow(Y))) GD1 = GD1[,1:(nrow(Y)/log(nrow(Y)))]
           myEM = EM_LASSO(CV = CV.back,GD = GD1,y = y,GM = GM1)
         }else{
           myEM = EM_LASSO(CV = CV.back,GD = GD1,y = y,GM = GM1)
