@@ -1,4 +1,4 @@
-HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.out = TRUE,getback=FALSE,LD = 0.7,p.threshold = NA , LD.num = 50){
+HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.out = TRUE,getback=FALSE,LD = 0.7,p.threshold = NA , LD.num = 50,GS.prediction = F){
   print("-----------------------Welcome to HDGENE, additive model is working----------------------")
   myEB = EBGWAS(Y = Y,GD = GD,CV= CV,GM = GM, maxLoop = maxLoop,file.output = F, getback = getback,LD = LD,p.threshold = p.threshold, LD.num = LD.num)
   beta = myEB$beta
@@ -68,7 +68,13 @@ HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.
         beta = NULL
       }else{
         print(paste(ncol(GD1),"SNPs were fitted in EM-BLASSO..."))
-        myEM = EM_LASSO(CV = CV.back,GD = GD1,y = y,GM = GM1)
+        if(GS.prediction){
+          if (ncol(GD1) > n/log(n)) GD1 = GD1[,1:(n/log(n))]
+          myEM = EM_LASSO(CV = CV.back,GD = GD1,y = y,GM = GM1)
+        }else{
+          myEM = EM_LASSO(CV = CV.back,GD = GD1,y = y,GM = GM1)
+        }
+        
         GWAS = myEM$GWAS
         beta = myEM$beta
         if(file.out)   write.table(GWAS,paste(trait.name,"_GWAS.txt",sep=""),sep="\t",col.names = T,row.names = F,quote = F)
