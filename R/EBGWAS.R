@@ -296,7 +296,7 @@
           print(paste(ncol(myG),"SNPs were fitted in EM-BLASSO..."))
           if(GS.prediction){
             maxSNP = ny/log(ny)
-            if (maxSNP > 200) maxSNP = 200
+            if (maxSNP > 40) maxSNP = 40
             if(ncol(myG) > maxSNP){
               myG = myG[,1:maxSNP]
               myGM = myGM[1:maxSNP,]

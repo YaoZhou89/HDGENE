@@ -70,7 +70,7 @@ HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.
         print(paste(ncol(GD1),"SNPs were fitted in EM-BLASSO..."))
         if(GS.prediction){
           maxSNP = nrow(Y)/log(nrow(Y))
-          if (maxSNP > 200) maxSNP = 200
+          if (maxSNP > 40) maxSNP = 40
                                
           if (ncol(GD1) > maxSNP) {
             GD1 = GD1[,1:maxSNP]
