@@ -295,9 +295,11 @@
           myGM = GM[seqQTN,]
           print(paste(ncol(myG),"SNPs were fitted in EM-BLASSO..."))
           if(GS.prediction){
-            if(ncol(myG) > ny/log(ny)){
-              myG = myG[,1:ny/log(ny)]
-              myGM = myGM[1:ny/log(ny),]
+            maxSNP = ny/log(ny)
+            if (maxSNP > 200) maxSNP = 200
+            if(ncol(myG) > maxSNP){
+              myG = myG[,1:maxSNP]
+              myGM = myGM[1:maxSNP,]
             }
             print(paste(ncol(myG),"SNPs were fitted in EM-BLASSO..."))
             myEM = EM_LASSO(CV1,myG,as.matrix(Y1[,2]),myGM)
