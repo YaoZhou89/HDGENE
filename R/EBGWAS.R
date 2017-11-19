@@ -240,7 +240,7 @@
       if(isDone){
         time.em.start =proc.time()
         seqQTN = which(GWAS[,4]<0.05/nrow(GWAS))
-        print(which(GWAS[,4] == min(GWAS[,4],na.rm = T)))
+        # print(which(GWAS[,4] == min(GWAS[,4],na.rm = T)))
         b=1
         while(length(union(seqQTN.save,seqQTN))<2){
           print("Less than 2 siginicant QTNs detected, EM-BLASSO skipped")
@@ -280,7 +280,7 @@
           GSorder = order(GWAS[seqQTN,4],decreasing = F,na.last = T)
           Psort = Blink.LDRemove(Porder = seqQTN[GSorder],GDneo = as.matrix(GD1[seqQTN,]),bound=FALSE,LD=0.7,model="A",orientation="col",LD.num = 100)
           seqQTN = Psort
-          print(head(seqQTN))
+          # print(head(seqQTN))
         }
 
         if(!is.null(CV)){
