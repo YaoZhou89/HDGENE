@@ -277,7 +277,7 @@
         seqQTN = union(seqQTN.save,seqQTN)
         if(GS.prediction){
           GSorder = order(GWAS[,4],decreasing = F,na.last = T)
-          Psort = Blink.LDRemove(Porder = GSorder,GDneo = as.matrix(GD1[seqQTN,]),bound=FASLE,LD=0.7,model="A",orientation="col",LD.num = 100)
+          Psort = Blink.LDRemove(Porder = GSorder,GDneo = as.matrix(GD1[seqQTN,]),bound=FALSE,LD=0.7,model="A",orientation="col",LD.num = 100)
           seqQTN = Psort
         }
 
