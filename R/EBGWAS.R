@@ -240,7 +240,7 @@
       if(isDone){
         time.em.start =proc.time()
         seqQTN = which(GWAS[,4]<0.05/nrow(GWAS))
-        print(max(which(min(GWAS[,4],na.rm = T))))
+        print(max(which(GWAS[,4] == min(GWAS[,4],na.rm = T))))
         b=1
         while(length(union(seqQTN.save,seqQTN))<2){
           print("Less than 2 siginicant QTNs detected, EM-BLASSO skipped")
