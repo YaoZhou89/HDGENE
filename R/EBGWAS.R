@@ -313,7 +313,6 @@
           
         }
 
-
         GWAS = myEM$GWAS
         beta = myEM$beta
         time.em.end = proc.time()
