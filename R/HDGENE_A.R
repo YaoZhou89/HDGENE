@@ -4,6 +4,7 @@ HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.
   beta = myEB$beta
   trait.name = colnames(Y)[2]
   Done = F
+  if(GS.prediction) Done = T
   GWAS = myEB$GWAS
   if(is.null(GWAS)){
     print("No significant QTNs,stop at first iteration!")
