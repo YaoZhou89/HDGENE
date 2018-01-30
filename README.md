@@ -24,4 +24,4 @@ myCV = read.table("demo.cov",head=T)
 myHDGENE = HDGENE_A(Y=myY,GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T)
 
 # Authors
-Yao Zhou (yao_wsu.zhou@wsu.edu)
+Dr. Yao Zhou (yao.zhou@genetics.ac.cn)
