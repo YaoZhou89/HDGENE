@@ -72,17 +72,17 @@ HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.
         if(GS.prediction){
           maxSNP = nrow(Y)/log(nrow(Y))
           if (maxSNP > 40) maxSNP = 40
-                               
+
           if (ncol(GD1) > maxSNP) {
             GD1 = GD1[,1:maxSNP]
             GM1 = GM1[1:maxSNP,]
           }
           print(paste(ncol(GD1),"SNPs were fitted in EM-BLASSO..."))
-          myEM = EM_LASSO(CV = CV.back[index.y,],GD = GD1,y = y,GM = GM1)
+          myEM = EM_LASSO(CV = CV.back,GD = GD1,y = y,GM = GM1)
         }else{
-          myEM = EM_LASSO(CV = CV.back[index.y,],GD = GD1,y = y,GM = GM1)
+          myEM = EM_LASSO(CV = CV.back,GD = GD1,y = y,GM = GM1)
         }
-        
+
         GWAS = myEM$GWAS
         beta = myEM$beta
         if(file.out)   write.table(GWAS,paste(trait.name,"_GWAS.txt",sep=""),sep="\t",col.names = T,row.names = F,quote = F)
