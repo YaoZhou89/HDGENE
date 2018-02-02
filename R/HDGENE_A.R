@@ -16,6 +16,7 @@ HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.
       myCV = t(as.matrix(GD[index,]))
     }else if(length(index)==1){
       myCV = as.matrix(GD[index,])
+      if (nrow(myCV) == 1) myCV = t(myCV)
     }else{
       Done = TRUE
     }
@@ -78,9 +79,9 @@ HDGENE_A  = function(CV = NULL,Y = NULL, GD = NULL,GM = NULL,maxLoop = 10, file.
             GM1 = GM1[1:maxSNP,]
           }
           print(paste(ncol(GD1),"SNPs were fitted in EM-BLASSO..."))
-          myEM = EM_LASSO(CV = CV.back,GD = GD1,y = y,GM = GM1)
+          myEM = EM_LASSO(CV = CV.back[index.y,],GD = GD1,y = y,GM = GM1)
         }else{
-          myEM = EM_LASSO(CV = CV.back,GD = GD1,y = y,GM = GM1)
+          myEM = EM_LASSO(CV = CV.back[index.y,],GD = GD1,y = y,GM = GM1)
         }
 
         GWAS = myEM$GWAS
