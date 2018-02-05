@@ -50,7 +50,7 @@
   }
   gc()
   shift=0
-  for(trait in 2:ncol(Y)){
+  for(trait in 2:2){ # bug for multiple traits not fixed, only support one trait per time
     name.of.trait=colnames(Y)[trait]
     index=MAF.index
     seqTaxa=which(!is.na(Y[,trait]))
@@ -312,7 +312,7 @@
           }else{
             myEM = EM_LASSO(CV1,myG,as.matrix(Y1[,2]),myGM)
           }
-          
+
         }
 
 
@@ -336,7 +336,7 @@
 
     time.end=proc.time()
     time.all=as.numeric(time.end)[3]-as.numeric(time.start)[3]
-    print(paste("-------------Additive model finished successfully in",round(time.all,2),"seconds!-----------------"))
+    print(paste("-------------Interation finished successfully in",round(time.all,2),"seconds!-----------------"))
     #	print(proc.time())
     if(file.output){
       write.table(GWAS,paste(name.of.trait2,"_GWAS.txt",sep=""),sep="\t",col.names=T,row.names=F)
