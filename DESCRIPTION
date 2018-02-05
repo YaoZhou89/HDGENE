@@ -2,12 +2,12 @@ Package: HDGENE
 Type: Package
 Title: HDGENE: High dimensional Genetic association analysis package
 Version: 0.1.0
-Author: Yao Zhou, Zhiwu Zhang
-Maintainer: Yao Zhou <yao_wsu.zhou@wsu.edu>
+Author: Yao Zhou
+Maintainer: Yao Zhou <yao.zhou@genetics.ac.cn>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: GPL (>= 2)
-Depends: R (>= 3.1.0), bigmemory, biganalytics, MASS, Rcpp (>= 0.12.12),inline,MASS,Matrix
+Depends: R (>= 3.1.0), bigmemory, biganalytics, MASS, Rcpp (>= 0.12.12),inline,MASS,Matrix,rrBLUP
 Suggests: compiler
 Encoding: UTF-8
 LazyData: true
