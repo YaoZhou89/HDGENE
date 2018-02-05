@@ -23,7 +23,7 @@
       vv=vv+tcrossprod(zz,zz)*v[i]
     }
     vv<-vv+diag(n)*v0
-    iter<-0;err<-1000;iter_max<-5000;err_max<-1e-10
+    iter<-0;err<-1000;iter_max<-50;err_max<-1e-10
     tau<-0;omega<-0
     while((iter<iter_max)&&(err>err_max))
     {
