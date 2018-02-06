@@ -20,11 +20,11 @@ HDGENE: High dimensional genetic association analysis package
 
 ## # run additive only model
 
-    myHDGENE = HDGENE(Y=myY,GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T,model = "A")
+    myHDGENE = HDGENE(Y = myY,GD = myGD,GM = myGM,CV = myCV, maxLoop = 10,file.out = T,model = "A")
 
 ## # run epistatic model: (model = "AA" or AA = "full")
 
-    myHDGENE = HDGENE(Y= myY,GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T,model = "AA")
+    myHDGENE = HDGENE(Y = myY,GD = myGD,GM = myGM,CV = myCV, maxLoop = 10,file.out = T,model = "AA")
     
 # Authors
 Dr. Yao Zhou (yao.zhou@genetics.ac.cn)
