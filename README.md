@@ -27,12 +27,8 @@ HDGENE: High dimensional genetic association analysis package
 
     yblup = HDGENE.BLUPresidual(Y = myY[,c(1,2)],GD = myGD,model = "AA")
 ### 2. run additive and interaction models
-#### # Additive effects
 
-    myHDGENE_A = HDGENE_A(Y= yblup[,c(1,2)],GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T)
-#### # Epistatic effects    
-
-    myHDGENE_EPI = HDGENE_EPI(Y= yblup[,c(1,2)],GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T,model = "AA")
+    myHDGENE_EPI = HDGENE_EPI(Y= yblup,GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T,model = "AA")
     
 # Authors
 Dr. Yao Zhou (yao.zhou@genetics.ac.cn)
