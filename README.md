@@ -22,7 +22,7 @@ HDGENE: High dimensional genetic association analysis package
 
     myHDGENE = HDGENE(Y=myY,GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T,model = "A")
 
-## # run epistatical models:
+## # run epistatic model: (model = "AA" or AA = "full")
 
     myHDGENE = HDGENE(Y= myY,GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T,model = "AA")
     
