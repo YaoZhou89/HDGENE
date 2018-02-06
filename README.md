@@ -8,7 +8,7 @@ HDGENE: High dimensional genetic association analysis package
 
 # Running the tests
     library(HDGENE)
-## #read data
+## # read data
 
     myGD = read.big.matrix("demo.dat",head=F,sep="\t",type="char")
 
@@ -18,7 +18,7 @@ HDGENE: High dimensional genetic association analysis package
 
     myCV = read.table("demo.cov",head=T)
 
-## #run additive only model
+## # run additive only model
 
     myHDGENE = HDGENE_A(Y=myY,GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T)
 
@@ -27,13 +27,12 @@ HDGENE: High dimensional genetic association analysis package
 
     yblup = HDGENE.BLUPresidual(Y = myY[,c(1,2)],GD = myGD,model = "AA")
 ### 2. run additive and interaction models
-#### # additive effects
+#### # Additive effects
 
     myHDGENE_A = HDGENE_A(Y= yblup[,c(1,2)],GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T)
 #### # Epistatic effects    
 
     myHDGENE_EPI = HDGENE_EPI(Y= yblup[,c(1,2)],GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T,model = "AA")
     
-#### # additive     
 # Authors
 Dr. Yao Zhou (yao.zhou@genetics.ac.cn)
