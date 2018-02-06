@@ -20,7 +20,7 @@ HDGENE: High dimensional genetic association analysis package
 
 ## # run additive only model
 
-    myHDGENE = HDGENE_A(Y=myY,GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T)
+    myHDGENE = HDGENE(Y=myY,GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T,model = "A")
 
 ## # run epistatical models:
 ###  1. calcuating the blup residuals: (model: AA: A by A only , full: AA, AD, DA and DD)
@@ -28,7 +28,7 @@ HDGENE: High dimensional genetic association analysis package
     yblup = HDGENE.BLUPresidual(Y = myY[,c(1,2)],GD = myGD,model = "AA")
 ### 2. run additive and interaction models
 
-    myHDGENE_EPI = HDGENE_EPI(Y= yblup,GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T,model = "AA")
+    myHDGENE = HDGENE(Y= yblup,GD=myGD,GM=myGM,CV=myCV, maxLoop = 10,file.out = T,model = "AA")
     
 # Authors
 Dr. Yao Zhou (yao.zhou@genetics.ac.cn)
