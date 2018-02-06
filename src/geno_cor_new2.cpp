@@ -18,18 +18,19 @@ using namespace std;
 //   return corr;
 // }
 // [[Rcpp::export]]
-RcppExport SEXP  geno_cor_new ( SEXP  YY,SEXP GDD,SEXP ww,SEXP coorr,SEXP mm,SEXP KK) {
+RcppExport SEXP  geno_cor_new2 ( SEXP  YY,SEXP GDD,SEXP GDDD,SEXP ww,SEXP coorr,SEXP mm,SEXP KK) {
   NumericVector Y  = Rcpp::as<NumericVector>(YY);
   NumericMatrix GD = Rcpp::as<NumericMatrix>(GDD);
+  NumericMatrix GDA = Rcpp::as<NumericMatrix>(GDDD);
   NumericMatrix w = Rcpp::as<NumericMatrix>(ww);
   NumericMatrix corr = Rcpp::as<NumericMatrix>(coorr);
   int m =  Rcpp::as<int>(mm);
   int K =  Rcpp::as<int>(KK);
   for(int i = 0; i < m ; i++){
-    for(int j =0; j < i ; j++){
+    for(int j =0; j < i + 1; j++){
       double pc = 0;
       for(int k = 0; k < K; k++){
-        pc +=  GD(i,k)*GD(j,k)*Y(k);
+        pc +=  GD(i,k)*GDA(j,k)*Y(k);
       }
       corr(i,j) = pc;
     }
@@ -90,7 +91,7 @@ NumericVector crossprod(NumericMatrix X, NumericVector Y, int P,int K){
 NumericVector getInteract(NumericVector X, NumericVector Y,int m){
   NumericVector prod(m);
   for(int p = 0; p < m; p++){
-      prod(p) = X(p)*Y(p) ;
+    prod(p) = X(p)*Y(p) ;
   }
   return prod;
 }
@@ -112,7 +113,7 @@ double getAbs (NumericVector X, NumericVector Y,int n){
 // NumericVector getMinus(NumericVector X, )
 // inline static double sqrt_double( double x ){ return ::sqrt( x ); }
 // [[Rcpp::export]]
-NumericVector  geno_cor (NumericVector & Y, NumericMatrix & GD, NumericMatrix & w,int m, int n,int p) {
+NumericVector  geno_cor2 (NumericVector & Y, NumericMatrix & GD, NumericMatrix & GDD, NumericMatrix & w,int m, int n,int p) {
   NumericMatrix corr(m,m);
   NumericVector GDi(n);
   NumericVector GDt(n),GDtt(n),GDttt(n);
@@ -120,7 +121,7 @@ NumericVector  geno_cor (NumericVector & Y, NumericMatrix & GD, NumericMatrix & 
   for (int i = 0 ; i < m; i++){
     for(int j = 0; j < i + 1; j++){
       r = 0;
-      GDi = getInteract(GD(i,_),GD(j,_),n);
+      GDi = getInteract(GD(i,_),GDD(j,_),n);
       GDt = product(w,crossprod(w,GDi,p,n),n,p);
       GDtt = GDi - GDt;
       colsq = colSumsq(GDtt,n);

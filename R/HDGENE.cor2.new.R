@@ -1,4 +1,4 @@
-`HDGENE.cor.new`<-function(Y,GD,w=NULL,ms=10000){
+`HDGENE.cor2.new`<-function(Y,GD,GDD,w=NULL,ms=10000){
   # require(inline)
   #Objects: calculate R value with covariates
   #Input: pheontype(nx1), ms is marker size for slicing the genotype, genotype(orientation="row", mxn or orientation="col", nxm,) and covariates(nxp)
@@ -74,9 +74,11 @@
   #   rm(GDs,div)
   # }
   GD = as.matrix(GD)
+  GDD = as.matrix(GDD)
   p = ncol(w)
-  # rabs = geno_cor(Y,GD,w,m,n,p)
-  rabs = abs(geno_cor_new(Y,GD,w,matrix(NA,m,m),m,n))
+  rabs = abs(geno_cor_new2(Y,GD,GDD,w,matrix(NA,m,m),m,n))
+
+  # rabs = geno_cor2(Y,GD,GDD,w,m,n,p)
   t4 = proc.time()
   return(rabs)
 }

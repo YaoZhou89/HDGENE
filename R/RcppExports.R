@@ -5,3 +5,11 @@ geno_cor_new <- function(YY, GDD, ww, coorr, mm, KK) {
     .Call('_HDGENE_geno_cor_new', PACKAGE = 'HDGENE', YY, GDD, ww, coorr, mm, KK)
 }
 
+geno_cor <- function(Y, GD, tw, corr, m, K, P) {
+    .Call('_HDGENE_geno_cor', PACKAGE = 'HDGENE', Y, GD, tw, corr, m, K, P)
+}
+
+geno_cor_new2 <- function(YY, GDD, GDDD, ww, coorr, mm, KK) {
+    .Call('_HDGENE_geno_cor_new2', PACKAGE = 'HDGENE', YY, GDD, GDDD, ww, coorr, mm, KK)
+}
+
