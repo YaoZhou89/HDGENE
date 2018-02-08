@@ -144,7 +144,6 @@
       print("No epistatic effects detected!")
       myGWAS = NULL
     }
-  }
 
   ##
   return(GWAS = myGWAS)
