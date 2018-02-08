@@ -14,6 +14,7 @@
   for (i in 1:KL){
     ETA[[i]] = list(Ki = K[i][[1]],model="RKHS")
   }
+
   dirFile = paste(getwd(),"/HDGENE_ploygenetic_BGLR_",sep="")
   fmA <- BGLR(y=Y,
               ETA=ETA,
