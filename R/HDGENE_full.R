@@ -1,25 +1,32 @@
-HDGENE_full = function(CV= NULL,GD=NULL,GDD = NULL,GM=NULL,Y=NULL,seqQTN = NULL,p.threshold = NULL,maxIter=3,GWAS=NULL,LD.pruning = F,position.pruning=NULL,LD=0.7){
+HDGENE_full = function(CV= NULL,GD=NULL,GDD = NULL,GM=NULL,Y=NULL,seqQTN = NULL,p.threshold = NULL,maxIter=3,GWAS=NULL,LD.pruning = F,position.pruning=NULL,LD=0.7,model=NULL){
   # AA
   print("---------------------Welcome to HDGENE, Additive by Additive is working...-----------------")
   # YY = Y
   index.y = which(!is.na(Y[,2]))
   Y = Y[index.y,]
   CV = CV[index.y,]
-  GD = GD[,index.y]
-  GDD = GDD[,index.y]
+  GD = GD[,index.y] - 1
+  if(model == "AA"){
+    GDD = GD
+  }else if (model =="AD"){
+    GDD = 1 - abs(GD)
+  }else if (model == "DD"){
+    GD = 1 - abs(GD)
+    GDD = GD
+  }else{
+    stop("incorrect model!")
+  }
   m = nrow(GD)
   # force to do LD pruning when marker number larger than 10e5
   if(m>10e4 & is.null(position.pruning)) LD.pruning = TRUE
-
   if(LD.pruning & is.null(position.pruning)){
     position.pruning = HDGENE.pruning(GD,GM,10000,LD)
   }
   if(is.null(GWAS)){
     print("---------------------Additive by Additive model-----------------")
-    GWAS = HDGENE.pairDetection(CV= CV, GD = GD,GDD = GDD,GM = GM,Y = Y,seqQTN = seqQTN,p.threshold = p.threshold, position.pruning = position.pruning)
+    GWAS = HDGENE.pairDetection(CV= CV, GD = GD,GDD = GDD,GM = GM,Y = Y,seqQTN = seqQTN,p.threshold = p.threshold, position.pruning = position.pruning,model=model)
     # write.table(GWAS,paste(colnames(Y)[2],"_GWAS_eps.txt",sep=""),col.names=T,row.names = F,quote=F,sep="\t")
-  }else{
-    GWAS = GWAS
+  }else{    GWAS = GWAS
   }
   index.aa = !is.na(GWAS[,2])
   index.aa.save = index.aa
@@ -49,7 +56,7 @@ HDGENE_full = function(CV= NULL,GD=NULL,GDD = NULL,GM=NULL,Y=NULL,seqQTN = NULL,
 
     if(!Done){
       print("---------------------Additive by Additive model-----------------")
-      GWAS = HDGENE.pairDetection(CV= CV, GD = GD,GDD = GDD, GM = GM,Y = Y,seqQTN = seqQTN,p.threshold = p.threshold,position.pruning = position.pruning)
+      GWAS = HDGENE.pairDetection(CV= CV, GD = GD,GDD = GDD, GM = GM,Y = Y,seqQTN = seqQTN,p.threshold = p.threshold,position.pruning = position.pruning,model=model)
       # write.table(GWAS,paste(colnames(Y)[2],"_GWAS_eps.txt",sep=""),col.names=T,row.names = F,quote=F,sep="\t")
     }else{
       if(is.null(seqQTN)){
