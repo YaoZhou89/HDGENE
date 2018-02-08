@@ -1,4 +1,4 @@
-`HDGENE.pairDetection` <- function(CV = NULL,GD = NULL,GDD = NULL,GM = NULL,Y = NULL,p.threshold = NULL,seqQTN = NULL,position.pruning=NULL,LD = 0.7){
+`HDGENE.pairDetection` <- function(CV = NULL,GD = NULL,GDD = NULL,GM = NULL,Y = NULL,p.threshold = NULL,seqQTN = NULL,position.pruning=NULL,LD = 0.7,model = NULL){
   # Objects: doing G by G using GLM, full screen
   # inputs:
   #		CV: n by p , p fixed effects
@@ -14,9 +14,6 @@
   # Last Update: July 19, 2017
 
   ## prepare input
-  if (is.null(GDD)){
-    myGWAS = HDGENE_AA_full(CV = CV,GD = GD,GM = GM,Y = GM,p.threshold = p.threshold,seqQTN = seqQTN,position.pruning=position.pruning,LD = LD)
-  }else{
     index.y = which(!is.na(Y[,2]))
     NeedDo = FALSE
     myGWAS = NULL
@@ -54,14 +51,14 @@
     t1 = proc.time()
     print("Testing interaction....")
     if(m > 10e4){
-      aa_cor = HDGENE.cor2.new(Y = Y[index.y,2], GD = GD1,GDD = GDD1, w = CV.BIC, ms = 100000)
+      aa_cor = HDGENE.cor2.new(Y = Y[index.y,2], GD = GD1,GDD = GDD1, w = CV.BIC, ms = 100000,model = model)
       aa_order = order(aa_cor,decreasing = T,na.last = T)
       aa_length = sum(!is.na(aa_cor))
       aa_log = n/log(n)
       aa_lim = min(aa_log,aa_length)
       index.aa = aa_order[1:aa_lim]
     }else{
-      aa_cor = HDGENE.cor2(Y = Y[index.y,2], GD = GD1, GDD = GDD1, w = CV.BIC, ms = 100000)
+      aa_cor = HDGENE.cor2(Y = Y[index.y,2], GD = GD1, GDD = GDD1, w = CV.BIC, ms = 100000,model = model)
       p = Blink.rtop(r=aa_cor,df = n - k)
       index.aa = which(p < p.threshold)
     }

@@ -109,8 +109,8 @@ RcppExport SEXP  geno_cor_new ( SEXP  YY,SEXP GDD,SEXP ww,SEXP coorr,SEXP mm,SEX
 //   if (r < 0) r = -r;
 //   return r;
 // }
-// // NumericVector getMinus(NumericVector X, )
-// // inline static double sqrt_double( double x ){ return ::sqrt( x ); }
+// // // NumericVector getMinus(NumericVector X, )
+// // // inline static double sqrt_double( double x ){ return ::sqrt( x ); }
 // // [[Rcpp::export]]
 // NumericVector  geno_cor (NumericVector & Y, NumericMatrix & GD, NumericMatrix & w,int m, int n,int p) {
 //   NumericMatrix corr(m,m);

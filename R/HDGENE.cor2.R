@@ -1,4 +1,4 @@
-`HDGENE.cor2`<-function(Y,GD,GDD,w=NULL,ms=10000){
+`HDGENE.cor2`<-function(Y,GD,w=NULL,ms=10000,model = NULL){
   #Objects: calculate R value with covariates
   #Input: pheontype(nx1), ms is marker size for slicing the genotype, genotype(orientation="row", mxn or orientation="col", nxm,) and covariates(nxp)
   #		n is individual number, m is marker number, p is covariate number
@@ -56,8 +56,15 @@
         }else{
           GDs = t(GDs)
         }
-
-        GDs = (GD[marker,]) * GDs
+        if(model == "AA"){
+          GDs = GD[marker,] * GDs
+        }else if (model == "AD"){
+          GDs = GD[marker,] * (1 - abs(GDs))
+        }else if (model == "DD"){
+          GDs = (1- abs(GD[marker,])) * (1 - abs(GDs))
+        }else{
+          stop("Model type incorrect!")
+        }
         GDs = GDs- crossprod(tw,tw%*%GDs)
         colsq= colSums(GDs^2)
         div = sqrt(colsq)
