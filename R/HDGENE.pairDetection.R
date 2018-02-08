@@ -51,14 +51,14 @@
     t1 = proc.time()
     print("Testing interaction....")
     if(m > 10e4){
-      aa_cor = HDGENE.cor2.new(Y = Y[index.y,2], GD = GD1,GDD = GDD1, w = CV.BIC, ms = 100000,model = model)
+      aa_cor = HDGENE.cor2.new(Y = Y[index.y,2], GD = GD1, w = CV.BIC, ms = 100000,model = model)
       aa_order = order(aa_cor,decreasing = T,na.last = T)
       aa_length = sum(!is.na(aa_cor))
       aa_log = n/log(n)
       aa_lim = min(aa_log,aa_length)
       index.aa = aa_order[1:aa_lim]
     }else{
-      aa_cor = HDGENE.cor2(Y = Y[index.y,2], GD = GD1, GDD = GDD1, w = CV.BIC, ms = 100000,model = model)
+      aa_cor = HDGENE.cor2(Y = Y[index.y,2], GD = GD1, w = CV.BIC, ms = 100000,model = model)
       p = Blink.rtop(r=aa_cor,df = n - k)
       index.aa = which(p < p.threshold)
     }
