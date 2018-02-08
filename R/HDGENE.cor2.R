@@ -50,7 +50,7 @@
           up = m
         }
 
-        GDs = GDD[bottom:up,]
+        GDs = GD[bottom:up,]
         if(bottom==up){
           GDs = as.matrix(GDs)
         }else{
